@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Mar 23 09:47:35 2019
-
-@author: aiktc
-"""
 
 import numpy as np
 
@@ -18,7 +11,7 @@ for i in range(0,N):
     L=[]
     for j in range(0,N):
         L.append(int(input('Page'+str(i+1)+' to Page'+str(j+1)+': ')))
-    mat.append(L)
+    links.append(L)
 
 D=(1-d)/N
 C=np.ones((N,1),dtype=int)
@@ -27,18 +20,18 @@ C=np.matrix(C)
 outboundL=np.zeros((N,),dtype=int)
 for i in range (0,N):
     for j in range (0,N):
-        if mat[i][j]==1:
+        if links[i][j]==1:
             outboundL[i]=outboundL[i]+1
 
 M=np.zeros((N,N))
-for i in range (0,n):
-    for j in range (0,n):
-        if mat[j][i]==1:
+for i in range (0,N):
+    for j in range (0,N):
+        if links[j][i]==1:
             M[i][j]=1/outboundL[j]
 
 M=np.matrix(M)
 
-rank=np.matrix(np.full((n,1),1/n))
+rank=np.matrix(np.full((N,1),1/N))
 
 while True:
     ranknext=d*np.dot(M,rank)+ D*C
